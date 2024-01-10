@@ -12,3 +12,11 @@ effects:
     effects: [NIGHTVISION:1]
     delay: 0
     perm: nightvision.permission
+
+messages:
+  effect_give: "You have activated effect %effect%"
+  effect_disable: "You disable the effect %effect%"
+  error_disable_default: "You can't disable this effect because he is a default effect"
+  error_effect_exist: "This effect don't exist"
+  error_effect_permission: "You don't have the permssion to use the effect %effect%"
+  no_permission: "You don't have the permission to do that"

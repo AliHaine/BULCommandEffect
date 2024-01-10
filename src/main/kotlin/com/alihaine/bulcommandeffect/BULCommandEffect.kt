@@ -5,7 +5,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 class BULCommandEffect : JavaPlugin() {
 
+    companion object {
+        lateinit var bulCommandEffect: BULCommandEffect
+            private set
+    }
+
     override fun onEnable() {
+        bulCommandEffect = this;
+
         this.server.pluginManager.registerEvents(OnCommandPreprocess(), this);
     }
 
