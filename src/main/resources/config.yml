@@ -4,19 +4,21 @@ give_by_default: [nightvision]
 effects:
   example1:
     commands: [/mysuper command]
-    effects: [REGENERATION, STRENGTH]
+    effects: [REGENERATION 1, STRENGTH 2]
     duration: 60
+    cooldown: 300
     perm: my.custom.permission
   nightvision:
     commands: [/nv, /nightvision, /night vision]
-    effects: [NIGHTVISION]
+    effects: [NIGHTVISION 1]
     duration: 0
+    cooldown: 10
     perm: nightvision.permission
 
 messages:
-  effect_give: "You have activated effect %effect%"
-  effect_disable: "You disable the effect %effect%"
-  error_disable_default: "You can't disable this effect because he is a default effect"
-  error_effect_exist: "This effect don't exist"
-  error_effect_permission: "You don't have the permssion to use the effect %effect%"
-  no_permission: "You don't have the permission to do that"
+  effect_give: "&aYou have activated effect %effect%"
+  effect_disable: "&cYou disable the effect %effect%"
+  effect_on_cooldown: "&cYou have to wait %time% before using again the effect %effect%"
+  error_config_effect_exist: "&cERROR: the potion effect %potion% in the effect %effect% don't exist"
+  error_effect_permission: "&cYou don't have the permssion to use the effect %effect%"
+  no_permission: "&cYou don't have the permission to do that"

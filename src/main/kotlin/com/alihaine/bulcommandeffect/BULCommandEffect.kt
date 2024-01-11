@@ -18,10 +18,10 @@ class BULCommandEffect : JavaPlugin() {
 
         Config.reloadConfig()
         this.server.pluginManager.registerEvents(OnCommandPreprocess(), this)
-        Bukkit.getConsoleSender().sendMessage("Enable BULcmeffect")
+        Bukkit.getConsoleSender().sendMessage("BULCommandEffect enabled")
     }
 
     override fun onDisable() {
-
+        Bukkit.getConsoleSender().sendMessage("BULCommandEffect disable")
     }
 }

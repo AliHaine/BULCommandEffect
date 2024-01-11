@@ -3,6 +3,7 @@ package com.alihaine.bulcommandeffect.utils;
 import com.alihaine.bulcommandeffect.BULCommandEffect
 import com.alihaine.bulcommandeffect.core.CommandEffect
 import com.alihaine.bulcommandeffect.core.Effect
+import com.alihaine.bulcommandeffect.core.INFINITE
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.potion.PotionEffectType
@@ -44,11 +45,12 @@ class Config {
                 val commandsList: MutableList<String?> = getConfigStringList("${section.name}.$key.commands")
                 val effectsList: MutableList<Effect> = convertStringListToEffect(getConfigStringList("${section.name}.$key.effects"))
                 var duration: Int = getConfigInt("${section.name}.$key.duration") * 20
-                val perm: String = getConfigString("${section.name}.$key.perm")!!
+                val cooldown: Int = getConfigInt("${section.name}.$key.cooldown")
+                val perm: String? = getConfigString("${section.name}.$key.perm")
 
                 if (duration == 0)
-                    duration = 99999;
-                list.add(CommandEffect(commandsList, effectsList, duration, perm))
+                    duration = INFINITE;
+                list.add(CommandEffect(commandsList, effectsList, duration, cooldown, perm.toString()))
             }
             return list;
         }
@@ -59,13 +61,15 @@ class Config {
 
             for (str in stringList) {
                 if (str == null)
-                    continue;
-                amplifier = str.last().digitToInt() - 1;
+                    continue
+                amplifier = str.last().digitToInt() - 1
 
-                //todo check non null
                 val po: PotionEffectType? = PotionEffectType.getByName(str.dropLast(2))
+                if (po == null) {
+                    Message.sendMessage(null, Message.ERROR_CONFIG_EFFECT_EXIST)
+                    continue
+                }
                 effectsList.add(Effect(po, amplifier))
-
             }
             return effectsList
         }

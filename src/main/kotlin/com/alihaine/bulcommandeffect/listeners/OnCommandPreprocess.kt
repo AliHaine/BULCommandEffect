@@ -8,10 +8,11 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent
 
 class OnCommandPreprocess : Listener {
 
-    //todo async run ?
     @EventHandler
     fun onPlayerCommandPreprocess(event: PlayerCommandPreprocessEvent) {
         val commandEffect: CommandEffect = Config.getCommandEffect(event.message) ?: return
-        commandEffect.applyEffects(event.player)
+
+        commandEffect.commandEffectApplier(event.player)
+        event.isCancelled = true
     }
 }

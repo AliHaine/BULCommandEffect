@@ -6,14 +6,14 @@ import org.bukkit.entity.Player
 enum class Message {
     EFFECT_GIVE,
     EFFECT_DISABLE,
-    ERROR_DISABLE_DEFAULT,
-    ERROR_EFFECT_EXIST,
+    EFFECT_ON_COOLDOWN,
+    ERROR_CONFIG_EFFECT_EXIST,
     ERROR_EFFECT_PERMISSION,
     NO_PERMISSION;
 
     companion object {
         fun sendMessage(player: Player?, msg: Message) {
-            val message: String? = Config.getConfigString("messages" + msg.name.lowercase())
+            val message: String? = Config.getConfigString("messages.${msg.name.lowercase()}")
 
             if (message.isNullOrEmpty())
                 return
