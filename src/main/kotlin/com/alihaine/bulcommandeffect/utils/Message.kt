@@ -13,14 +13,14 @@ enum class Message {
 
     companion object {
         fun sendMessage(player: Player?, msg: Message) {
-            val message: String? = Config.getConfigString("messages" + msg.name.lowercase());
+            val message: String? = Config.getConfigString("messages" + msg.name.lowercase())
 
             if (message.isNullOrEmpty())
-                return;
+                return
             if (player == null)
-                Bukkit.getConsoleSender().sendMessage(message.replace('&', '§'));
+                Bukkit.getConsoleSender().sendMessage(message.replace('&', '§'))
             else
-                player.sendMessage(message.replace('&', '§'));
+                player.sendMessage(message.replace('&', '§'))
         }
     }
 }

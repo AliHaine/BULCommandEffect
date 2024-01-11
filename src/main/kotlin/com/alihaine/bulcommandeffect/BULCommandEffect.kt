@@ -1,6 +1,8 @@
 package com.alihaine.bulcommandeffect;
 
 import com.alihaine.bulcommandeffect.listeners.OnCommandPreprocess
+import com.alihaine.bulcommandeffect.utils.Config
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin;
 
 class BULCommandEffect : JavaPlugin() {
@@ -11,9 +13,12 @@ class BULCommandEffect : JavaPlugin() {
     }
 
     override fun onEnable() {
-        bulCommandEffect = this;
+        bulCommandEffect = this
+        this.saveDefaultConfig();
 
-        this.server.pluginManager.registerEvents(OnCommandPreprocess(), this);
+        Config.reloadConfig()
+        this.server.pluginManager.registerEvents(OnCommandPreprocess(), this)
+        Bukkit.getConsoleSender().sendMessage("Enable BULcmeffect")
     }
 
     override fun onDisable() {

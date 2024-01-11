@@ -4,13 +4,13 @@ give_by_default: [nightvision]
 effects:
   example1:
     commands: [/mysuper command]
-    effects: [REGENERATION:1, STRENGTH:2]
-    delay: 60
+    effects: [REGENERATION, STRENGTH]
+    duration: 60
     perm: my.custom.permission
   nightvision:
     commands: [/nv, /nightvision, /night vision]
-    effects: [NIGHTVISION:1]
-    delay: 0
+    effects: [NIGHTVISION]
+    duration: 0
     perm: nightvision.permission
 
 messages:
