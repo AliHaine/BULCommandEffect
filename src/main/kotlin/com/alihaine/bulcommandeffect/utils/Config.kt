@@ -3,13 +3,12 @@ package com.alihaine.bulcommandeffect.utils;
 import com.alihaine.bulcommandeffect.BULCommandEffect
 import com.alihaine.bulcommandeffect.core.CommandEffect
 import com.alihaine.bulcommandeffect.core.Effect
-import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.potion.PotionEffectType
 
 class Config {
+
     companion object {
         private val bulCommandEffect: BULCommandEffect = BULCommandEffect.bulCommandEffect
         private var config: FileConfiguration = bulCommandEffect.config
@@ -45,7 +44,7 @@ class Config {
                 val commandsList: MutableList<String?> = getConfigStringList("${section.name}.$key.commands")
                 val effectsList: MutableList<Effect> = convertStringListToEffect(getConfigStringList("${section.name}.$key.effects"))
                 var duration: Int = getConfigInt("${section.name}.$key.duration") * 20
-                val perm: String? = getConfigString("${section.name}.$key.perm")
+                val perm: String = getConfigString("${section.name}.$key.perm")!!
 
                 if (duration == 0)
                     duration = 99999;
@@ -71,11 +70,13 @@ class Config {
             return effectsList
         }
 
-        fun getCommandEffectFromCommand(command: String): CommandEffect? {
-            return null
-        }
-        fun test(): MutableList<CommandEffect> {
-            return effectLists
+        fun getCommandEffect(command: String): CommandEffect? {
+            for (commandEffect in effectLists) {
+                for (cmd in commandEffect.commands)
+                    if (cmd.equals(command))
+                        return commandEffect
+            }
+            return null;
         }
     }
 }

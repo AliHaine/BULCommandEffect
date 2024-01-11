@@ -8,10 +8,10 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent
 
 class OnCommandPreprocess : Listener {
 
+    //todo async run ?
     @EventHandler
-    fun onPlayerChat(event: PlayerCommandPreprocessEvent) {
-
-        val effectLists: MutableList<CommandEffect> = Config.test()
-        effectLists.get(event.message[1].digitToInt()).ApplyEffects(event.player, effectLists.get(event.message[1].digitToInt()).potionEffects)
+    fun onPlayerCommandPreprocess(event: PlayerCommandPreprocessEvent) {
+        val commandEffect: CommandEffect = Config.getCommandEffect(event.message) ?: return
+        commandEffect.applyEffects(event.player)
     }
 }

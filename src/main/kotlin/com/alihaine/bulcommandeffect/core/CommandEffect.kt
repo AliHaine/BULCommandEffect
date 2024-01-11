@@ -2,12 +2,13 @@ package com.alihaine.bulcommandeffect.core;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType
 
-class CommandEffect(val commands: MutableList<String?>, val potionEffects: MutableList<Effect>, val duration: Int, val permission: String?) {
+class CommandEffect(val commands: MutableList<String?>, val effects: MutableList<Effect>, val duration: Int, val permission: String) {
 
-    fun ApplyEffects(player: Player, effectList: MutableList<Effect>) {
-        for (effect in effectList) {
+    fun applyEffects(player: Player) {
+        if (permission.isNotEmpty() && !player.hasPermission(permission))
+            return
+        for (effect in effects) {
             println(effect.potionEffectType)
             player.addPotionEffect(PotionEffect(effect.potionEffectType!!, duration, effect.amplifier))
         }
