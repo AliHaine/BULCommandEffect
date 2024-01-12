@@ -1,26 +1,31 @@
-package com.alihaine.bulcommandeffect.core;
+package com.alihaine.bulcommandeffect.core
 
 import com.alihaine.bulcommandeffect.utils.ComponentEnum
 import com.alihaine.bulcommandeffect.utils.ComponentObj
 import com.alihaine.bulcommandeffect.utils.Cooldown
 import com.alihaine.bulcommandeffect.utils.Message
-import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
+import org.bukkit.entity.Player
+import org.bukkit.potion.PotionEffect
 
 const val INFINITE = 99999
 
-class CommandEffect(val section: String, val commands: MutableList<String?>, val effects: MutableList<Effect>, val duration: Int, val cooldown: Int, val permission: String) {
+class CommandEffect(val section: String, val commands: MutableList<String?>, private val effects: MutableList<Effect>, private val duration: Int, private val cooldown: Int, private val permission: String) {
 
     fun commandEffectApplier(player: Player) {
         if (permission.isNotEmpty() && !player.hasPermission(permission)) {
-            Message.sendMessage(player, Message.ERROR_EFFECT_PERMISSION)
+            Message.sendMessageComponent(player, Message.ERROR_EFFECT_PERMISSION, ComponentObj(ComponentEnum.EFFECT, section))
             return
         }
 
-        if (isInfiniteDuration() && alreadyHave(player))
+        if (isInfiniteDuration() && alreadyHaveEffects(player))
             removeEffects(player)
         else
             applyEffects(player)
+    }
+
+    fun commandEffectDefaultApplier(player: Player) {
+        for (effect in effects)
+            player.addPotionEffect(PotionEffect(effect.potionEffectType, duration, effect.amplifier))
     }
 
     private fun removeEffects(player: Player) {
@@ -42,11 +47,11 @@ class CommandEffect(val section: String, val commands: MutableList<String?>, val
         Message.sendMessageComponent(player, Message.EFFECT_GIVE, ComponentObj(ComponentEnum.EFFECT, section))
     }
 
-    fun isInfiniteDuration(): Boolean {
+    private fun isInfiniteDuration(): Boolean {
         return duration == INFINITE
     }
 
-    fun alreadyHave(player: Player): Boolean {
+    private fun alreadyHaveEffects(player: Player): Boolean {
         for (effect in effects) {
             if (!player.hasPotionEffect(effect.potionEffectType))
                 return false

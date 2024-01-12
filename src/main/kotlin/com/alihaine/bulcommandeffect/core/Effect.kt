@@ -1,5 +1,5 @@
-package com.alihaine.bulcommandeffect.core;
+package com.alihaine.bulcommandeffect.core
 
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionEffectType
 
 class Effect(val potionEffectType: PotionEffectType, val amplifier: Int)

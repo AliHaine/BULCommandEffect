@@ -1,4 +1,4 @@
-package com.alihaine.bulcommandeffect.utils;
+package com.alihaine.bulcommandeffect.utils
 
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player

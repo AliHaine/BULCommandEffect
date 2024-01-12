@@ -1,4 +1,4 @@
-package com.alihaine.bulcommandeffect.utils;
+package com.alihaine.bulcommandeffect.utils
 
 import com.alihaine.bulcommandeffect.BulCommandEffect
 import com.alihaine.bulcommandeffect.core.CommandEffect
@@ -13,7 +13,9 @@ class Config {
     companion object {
         private val bulCommandEffect: BulCommandEffect = BulCommandEffect.bulCommandEffect
         private var config: FileConfiguration = bulCommandEffect.config
-        private var effectLists: MutableList<CommandEffect> = setupEffectLists()
+        private var effectsList: MutableList<CommandEffect> = setupEffectsList()
+        private var defaultEffectsList: MutableList<String?> = setupDefaultEffectsList()
+        private var stayDeathEffectsList: MutableList<String> = setupStayDeathEffectsList()
 
         fun getConfigString(path: String): String? {
             return config.getString(path)
@@ -34,10 +36,11 @@ class Config {
         fun reloadConfig() {
             bulCommandEffect.reloadConfig()
             config = bulCommandEffect.config
-            effectLists = setupEffectLists()
+            effectsList = setupEffectsList()
+            defaultEffectsList = setupDefaultEffectsList()
         }
 
-        private fun setupEffectLists(): MutableList<CommandEffect> {
+        private fun setupEffectsList(): MutableList<CommandEffect> {
             val section: ConfigurationSection = config.getConfigurationSection("effects") ?: return mutableListOf()
             val list: MutableList<CommandEffect> = mutableListOf()
 
@@ -49,10 +52,10 @@ class Config {
                 val perm: String? = getConfigString("${section.name}.$key.perm")
 
                 if (duration == 0)
-                    duration = INFINITE;
+                    duration = INFINITE
                 list.add(CommandEffect(key, commandsList, effectsList, duration, cooldown, perm.toString()))
             }
-            return list;
+            return list
         }
 
         private fun convertStringListToEffect(stringList: MutableList<String?>): MutableList<Effect> {
@@ -74,13 +77,39 @@ class Config {
             return effectsList
         }
 
-        fun getCommandEffect(command: String): CommandEffect? {
-            for (commandEffect in effectLists) {
+        private fun setupDefaultEffectsList(): MutableList<String?> {
+            return getConfigStringList("config.give_by_default")
+        }
+
+        private fun setupStayDeathEffectsList(): MutableList<String> {
+            return config.getStringList("stay_after_death")
+        }
+
+        fun getDefaultCommandEffectList(): MutableList<CommandEffect> {
+            val defaultList: MutableList<CommandEffect> = mutableListOf()
+            for (str in defaultEffectsList) {
+                if (str == null)
+                    continue
+                getCommandEffectFromSection(str)?.let { defaultList.add(it) }
+            }
+            return defaultList
+        }
+
+        fun getCommandEffectFromCommand(command: String): CommandEffect? {
+            for (commandEffect in effectsList) {
                 for (cmd in commandEffect.commands)
-                    if (cmd.equals(command))
+                    if (cmd == command)
                         return commandEffect
             }
-            return null;
+            return null
+        }
+
+        fun getCommandEffectFromSection(section: String): CommandEffect? {
+            for (commandEffect in effectsList) {
+                if (commandEffect.section == section)
+                    return commandEffect
+            }
+            return null
         }
     }
 }

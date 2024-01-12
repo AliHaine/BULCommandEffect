@@ -1,9 +1,9 @@
-package com.alihaine.bulcommandeffect;
+package com.alihaine.bulcommandeffect
 
 import com.alihaine.bulcommandeffect.listeners.OnCommandPreprocess
-import com.alihaine.bulcommandeffect.utils.Config
+import com.alihaine.bulcommandeffect.listeners.OnPlayerJoin
 import org.bukkit.Bukkit
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPlugin
 
 class BulCommandEffect : JavaPlugin() {
 
@@ -14,10 +14,10 @@ class BulCommandEffect : JavaPlugin() {
 
     override fun onEnable() {
         bulCommandEffect = this
-        this.saveDefaultConfig();
+        this.saveDefaultConfig()
 
-        Config.reloadConfig()
         this.server.pluginManager.registerEvents(OnCommandPreprocess(), this)
+        this.server.pluginManager.registerEvents(OnPlayerJoin(), this)
         Bukkit.getConsoleSender().sendMessage("BULCommandEffect enabled")
     }
 
