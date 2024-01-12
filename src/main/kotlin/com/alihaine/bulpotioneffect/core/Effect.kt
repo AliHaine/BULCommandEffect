@@ -1,4 +1,4 @@
-package com.alihaine.bulcommandeffect.core
+package com.alihaine.bulpotioneffect.core
 
 import org.bukkit.potion.PotionEffectType
 

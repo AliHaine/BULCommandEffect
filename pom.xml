@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>BulCommandEffect</artifactId>
-    <groupId>com.alihaine.bulcommandeffect</groupId>
+    <artifactId>BulPotionEffect</artifactId>
+    <groupId>com.alihaine.bulpotioneffect</groupId>
     <version>1.0</version>
     <packaging>jar</packaging>
 

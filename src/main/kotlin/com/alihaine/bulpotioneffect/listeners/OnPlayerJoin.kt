@@ -1,6 +1,6 @@
-package com.alihaine.bulcommandeffect.listeners
+package com.alihaine.bulpotioneffect.listeners
 
-import com.alihaine.bulcommandeffect.utils.Config
+import com.alihaine.bulpotioneffect.utils.Config
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
@@ -12,7 +12,7 @@ class OnPlayerJoin : Listener {
         if (event.player.hasPlayedBefore())
             return
 
-        for (effect in Config.getDefaultCommandEffectList())
-            effect.commandEffectDefaultApplier(event.player)
+        for (effect in Config.getDefaultPotionEffectList())
+            effect.potionEffectDefaultApplier(event.player)
     }
 }

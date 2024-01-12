@@ -1,4 +1,4 @@
-package com.alihaine.bulcommandeffect.utils
+package com.alihaine.bulpotioneffect.utils
 
 import java.util.*
 

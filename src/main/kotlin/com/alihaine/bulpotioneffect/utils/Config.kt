@@ -1,21 +1,22 @@
-package com.alihaine.bulcommandeffect.utils
+package com.alihaine.bulpotioneffect.utils
 
-import com.alihaine.bulcommandeffect.BulCommandEffect
-import com.alihaine.bulcommandeffect.core.CommandEffect
-import com.alihaine.bulcommandeffect.core.Effect
-import com.alihaine.bulcommandeffect.core.INFINITE
+import com.alihaine.bulpotioneffect.BulPotionEffect
+import com.alihaine.bulpotioneffect.core.PotionEffect
+import com.alihaine.bulpotioneffect.core.Effect
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.potion.PotionEffectType
 
-class Config {
 
+
+class Config {
     companion object {
-        private val bulCommandEffect: BulCommandEffect = BulCommandEffect.bulCommandEffect
-        private var config: FileConfiguration = bulCommandEffect.config
-        private var effectsList: MutableList<CommandEffect> = setupEffectsList()
+        val infinite: Int = setInfiniteValue()
+        private val bulPotionEffect: BulPotionEffect = BulPotionEffect.bulPotionEffect
+        private var config: FileConfiguration = bulPotionEffect.config
+        private var effectsList: MutableList<PotionEffect> = setupEffectsList()
         private var defaultEffectsList: MutableList<String?> = setupDefaultEffectsList()
-        private var stayDeathEffectsList: MutableList<String> = setupStayDeathEffectsList()
+        private var stayDeathEffectsList: MutableList<String?> = setupStayDeathEffectsList()
 
         fun getConfigString(path: String): String? {
             return config.getString(path)
@@ -34,15 +35,16 @@ class Config {
         }
 
         fun reloadConfig() {
-            bulCommandEffect.reloadConfig()
-            config = bulCommandEffect.config
+            bulPotionEffect.reloadConfig()
+            config = bulPotionEffect.config
             effectsList = setupEffectsList()
             defaultEffectsList = setupDefaultEffectsList()
+            stayDeathEffectsList = setupStayDeathEffectsList()
         }
 
-        private fun setupEffectsList(): MutableList<CommandEffect> {
+        private fun setupEffectsList(): MutableList<PotionEffect> {
             val section: ConfigurationSection = config.getConfigurationSection("effects") ?: return mutableListOf()
-            val list: MutableList<CommandEffect> = mutableListOf()
+            val list: MutableList<PotionEffect> = mutableListOf()
 
             for (key in section.getKeys(false)) {
                 val commandsList: MutableList<String?> = getConfigStringList("${section.name}.$key.commands")
@@ -52,8 +54,8 @@ class Config {
                 val perm: String? = getConfigString("${section.name}.$key.perm")
 
                 if (duration == 0)
-                    duration = INFINITE
-                list.add(CommandEffect(key, commandsList, effectsList, duration, cooldown, perm.toString()))
+                    duration = infinite
+                list.add(PotionEffect(key, commandsList, effectsList, duration, cooldown, perm.toString()))
             }
             return list
         }
@@ -78,24 +80,24 @@ class Config {
         }
 
         private fun setupDefaultEffectsList(): MutableList<String?> {
-            return getConfigStringList("config.give_by_default")
+            return getConfigStringList("give_by_default")
         }
 
-        private fun setupStayDeathEffectsList(): MutableList<String> {
-            return config.getStringList("stay_after_death")
+        private fun setupStayDeathEffectsList(): MutableList<String?> {
+            return getConfigStringList("stay_after_death")
         }
 
-        fun getDefaultCommandEffectList(): MutableList<CommandEffect> {
-            val defaultList: MutableList<CommandEffect> = mutableListOf()
+        fun getDefaultPotionEffectList(): MutableList<PotionEffect> {
+            val defaultList: MutableList<PotionEffect> = mutableListOf()
             for (str in defaultEffectsList) {
                 if (str == null)
                     continue
-                getCommandEffectFromSection(str)?.let { defaultList.add(it) }
+                getPotionEffectFromSection(str)?.let { defaultList.add(it) }
             }
             return defaultList
         }
 
-        fun getCommandEffectFromCommand(command: String): CommandEffect? {
+        fun getPotionEffectFromCommand(command: String): PotionEffect? {
             for (commandEffect in effectsList) {
                 for (cmd in commandEffect.commands)
                     if (cmd == command)
@@ -104,12 +106,18 @@ class Config {
             return null
         }
 
-        fun getCommandEffectFromSection(section: String): CommandEffect? {
+        fun getPotionEffectFromSection(section: String): PotionEffect? {
             for (commandEffect in effectsList) {
                 if (commandEffect.section == section)
                     return commandEffect
             }
             return null
+        }
+
+        private fun setInfiniteValue(): Int {
+            if (BulPotionEffect.bulPotionEffect.is1_19OrHiher())
+                return org.bukkit.potion.PotionEffect.INFINITE_DURATION
+            return Int.MAX_VALUE
         }
     }
 }

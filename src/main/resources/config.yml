@@ -1,16 +1,15 @@
-stay_after_death: [example1, nightvision]
-give_by_default: [nightvision]
+give_by_default: [nightvision_example, example1]
 
 effects:
   example1:
     commands: [/mysuper command]
-    effects: [REGENERATION 1, STRENGTH 2]
+    effects: [REGENERATION 1, INCREASE_DAMAGE 2]
     duration: 60
     cooldown: 300
     perm: my.custom.permission
-  nightvision:
+  nightvision_example:
     commands: [/nv, /nightvision, /night vision]
-    effects: [NIGHTVISION 1]
+    effects: [NIGHT_VISION 1]
     duration: 0
     cooldown: 10
     perm: nightvision.permission

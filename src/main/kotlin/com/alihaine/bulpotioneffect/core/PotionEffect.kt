@@ -1,17 +1,13 @@
-package com.alihaine.bulcommandeffect.core
+package com.alihaine.bulpotioneffect.core
 
-import com.alihaine.bulcommandeffect.utils.ComponentEnum
-import com.alihaine.bulcommandeffect.utils.ComponentObj
-import com.alihaine.bulcommandeffect.utils.Cooldown
-import com.alihaine.bulcommandeffect.utils.Message
+import com.alihaine.bulpotioneffect.utils.*
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 
-const val INFINITE = 99999
+class PotionEffect(val section: String, val commands: MutableList<String?>, private val effects: MutableList<Effect>, private val duration: Int, private val cooldown: Int, private val permission: String) {
 
-class CommandEffect(val section: String, val commands: MutableList<String?>, private val effects: MutableList<Effect>, private val duration: Int, private val cooldown: Int, private val permission: String) {
 
-    fun commandEffectApplier(player: Player) {
+    fun potionEffectApplier(player: Player) {
         if (permission.isNotEmpty() && !player.hasPermission(permission)) {
             Message.sendMessageComponent(player, Message.ERROR_EFFECT_PERMISSION, ComponentObj(ComponentEnum.EFFECT, section))
             return
@@ -23,7 +19,7 @@ class CommandEffect(val section: String, val commands: MutableList<String?>, pri
             applyEffects(player)
     }
 
-    fun commandEffectDefaultApplier(player: Player) {
+    fun potionEffectDefaultApplier(player: Player) {
         for (effect in effects)
             player.addPotionEffect(PotionEffect(effect.potionEffectType, duration, effect.amplifier))
     }
@@ -48,7 +44,7 @@ class CommandEffect(val section: String, val commands: MutableList<String?>, pri
     }
 
     private fun isInfiniteDuration(): Boolean {
-        return duration == INFINITE
+        return duration == Config.infinite
     }
 
     private fun alreadyHaveEffects(player: Player): Boolean {
