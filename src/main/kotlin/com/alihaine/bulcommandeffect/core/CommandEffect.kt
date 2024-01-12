@@ -1,5 +1,7 @@
 package com.alihaine.bulcommandeffect.core;
 
+import com.alihaine.bulcommandeffect.utils.ComponentEnum
+import com.alihaine.bulcommandeffect.utils.ComponentObj
 import com.alihaine.bulcommandeffect.utils.Cooldown
 import com.alihaine.bulcommandeffect.utils.Message
 import org.bukkit.entity.Player;
@@ -25,20 +27,19 @@ class CommandEffect(val section: String, val commands: MutableList<String?>, val
         for (effect in effects) {
             player.removePotionEffect(effect.potionEffectType)
         }
-        Message.sendMessage(player, Message.EFFECT_DISABLE)
+        Message.sendMessageComponent(player, Message.EFFECT_DISABLE, ComponentObj(ComponentEnum.EFFECT, section))
     }
 
     private fun applyEffects(player: Player) {
         if (Cooldown.getCoolDownTimeLeft(player.uniqueId, section) > 0) {
-            Message.sendMessage(player, Message.EFFECT_ON_COOLDOWN)
-            println(Cooldown.getCoolDownTimeLeft(player.uniqueId, section))
+            Message.sendMessageComponent(player, Message.EFFECT_ON_COOLDOWN, ComponentObj(ComponentEnum.TIME, Cooldown.getCoolDownTimeLeft(player.uniqueId, section).toString()))
             return
         }
         for (effect in effects)
             player.addPotionEffect(PotionEffect(effect.potionEffectType, duration, effect.amplifier))
         if (!player.hasPermission("bulcommandeffect.cooldown.bypass"))
             Cooldown.addPlayerCoolDown(player.uniqueId, section, cooldown)
-        Message.sendMessage(player, Message.EFFECT_GIVE)
+        Message.sendMessageComponent(player, Message.EFFECT_GIVE, ComponentObj(ComponentEnum.EFFECT, section))
     }
 
     fun isInfiniteDuration(): Boolean {

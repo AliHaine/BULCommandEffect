@@ -33,7 +33,6 @@ class Cooldown(val section: String, val timer: Long) {
                 return 0
 
             for (remindCooldown in cooldownList[playerId]!!) {
-                println(remindCooldown.section + section)
                 if (remindCooldown.section == section)
                     return remindCooldown.timer.minus(System.currentTimeMillis()).div(1000)
             }

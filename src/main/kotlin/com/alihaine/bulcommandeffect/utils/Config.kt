@@ -66,7 +66,7 @@ class Config {
 
                 val po: PotionEffectType? = PotionEffectType.getByName(str.dropLast(2))
                 if (po == null) {
-                    Message.sendMessage(null, Message.ERROR_CONFIG_EFFECT_EXIST)
+                    Message.sendMessageComponent(null, Message.ERROR_CONFIG_EFFECT_EXIST, ComponentObj(ComponentEnum.POTION, str.dropLast(2)))
                     continue
                 }
                 effectsList.add(Effect(po, amplifier))
