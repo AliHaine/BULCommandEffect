@@ -7,7 +7,7 @@ import org.bukkit.potion.PotionEffect;
 
 const val INFINITE = 99999
 
-class CommandEffect(val commands: MutableList<String?>, val effects: MutableList<Effect>, val duration: Int, val cooldown: Int, val permission: String) {
+class CommandEffect(val section: String, val commands: MutableList<String?>, val effects: MutableList<Effect>, val duration: Int, val cooldown: Int, val permission: String) {
 
     fun commandEffectApplier(player: Player) {
         if (permission.isNotEmpty() && !player.hasPermission(permission)) {
@@ -29,15 +29,15 @@ class CommandEffect(val commands: MutableList<String?>, val effects: MutableList
     }
 
     private fun applyEffects(player: Player) {
-        if (Cooldown.getCoolDownTimeLeft(player.uniqueId) > 0) {
+        if (Cooldown.getCoolDownTimeLeft(player.uniqueId, section) > 0) {
             Message.sendMessage(player, Message.EFFECT_ON_COOLDOWN)
-            println(Cooldown.getCoolDownTimeLeft(player.uniqueId))
+            println(Cooldown.getCoolDownTimeLeft(player.uniqueId, section))
             return
         }
         for (effect in effects)
             player.addPotionEffect(PotionEffect(effect.potionEffectType, duration, effect.amplifier))
         if (!player.hasPermission("bulcommandeffect.cooldown.bypass"))
-            Cooldown.addPlayerCoolDown(player.uniqueId, cooldown)
+            Cooldown.addPlayerCoolDown(player.uniqueId, section, cooldown)
         Message.sendMessage(player, Message.EFFECT_GIVE)
     }
 

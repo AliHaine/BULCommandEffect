@@ -5,10 +5,10 @@ import com.alihaine.bulcommandeffect.utils.Config
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin;
 
-class BULCommandEffect : JavaPlugin() {
+class BulCommandEffect : JavaPlugin() {
 
     companion object {
-        lateinit var bulCommandEffect: BULCommandEffect
+        lateinit var bulCommandEffect: BulCommandEffect
             private set
     }
 

@@ -1,6 +1,6 @@
 package com.alihaine.bulcommandeffect.utils;
 
-import com.alihaine.bulcommandeffect.BULCommandEffect
+import com.alihaine.bulcommandeffect.BulCommandEffect
 import com.alihaine.bulcommandeffect.core.CommandEffect
 import com.alihaine.bulcommandeffect.core.Effect
 import com.alihaine.bulcommandeffect.core.INFINITE
@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType
 class Config {
 
     companion object {
-        private val bulCommandEffect: BULCommandEffect = BULCommandEffect.bulCommandEffect
+        private val bulCommandEffect: BulCommandEffect = BulCommandEffect.bulCommandEffect
         private var config: FileConfiguration = bulCommandEffect.config
         private var effectLists: MutableList<CommandEffect> = setupEffectLists()
 
@@ -50,7 +50,7 @@ class Config {
 
                 if (duration == 0)
                     duration = INFINITE;
-                list.add(CommandEffect(commandsList, effectsList, duration, cooldown, perm.toString()))
+                list.add(CommandEffect(key, commandsList, effectsList, duration, cooldown, perm.toString()))
             }
             return list;
         }

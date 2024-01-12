@@ -1,8 +1,8 @@
-name: BULCommandEffect
+name: BulCommandEffect
 version: ${project.version}
 description: ${project.description}
 author: AliHaine
-main: com.alihaine.bulcommandeffect.BULCommandEffect
+main: com.alihaine.bulcommandeffect.BulCommandEffect
 api-version: 1.13
 commands:
   bulcommandeffect:
