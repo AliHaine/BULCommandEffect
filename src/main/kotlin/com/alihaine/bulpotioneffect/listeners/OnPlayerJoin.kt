@@ -13,6 +13,6 @@ class OnPlayerJoin : Listener {
             return
 
         for (effect in Config.getDefaultPotionEffectList())
-            effect.potionEffectDefaultApplier(event.player)
+            effect.addEffects(event.player)
     }
 }

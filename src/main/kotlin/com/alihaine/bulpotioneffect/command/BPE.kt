@@ -39,7 +39,7 @@ class BPE : CommandExecutor{
             Message.sendMessage(player, Message.ERROR_UNKNOWN_COMMAND)
             return true
         }
-        sub.exec(args.copyOfRange(1, args.size))
+        sub.exec(player, args.copyOfRange(1, args.size))
 
         return true
     }

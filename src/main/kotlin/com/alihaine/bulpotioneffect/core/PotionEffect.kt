@@ -15,32 +15,28 @@ class PotionEffect(val section: String, val commands: MutableList<String?>, priv
 
         if (isInfiniteDuration() && alreadyHaveEffects(player))
             removeEffects(player)
-        else
-            applyEffects(player)
+        else {
+            if (Cooldown.getCoolDownTimeLeft(player.uniqueId, section) > 0) {
+                Message.sendMessageComponent(player, Message.EFFECT_ON_COOLDOWN, ComponentObj(ComponentEnum.TIME, Cooldown.getCoolDownTimeLeft(player.uniqueId, section).toString()))
+                return
+            }
+            addEffects(player)
+            if (!player.hasPermission("bulpotioneffect.bypass.cooldown"))
+                Cooldown.addPlayerCoolDown(player.uniqueId, section, cooldown)
+        }
     }
 
-    fun potionEffectDefaultApplier(player: Player) {
+    fun addEffects(player: Player) {
         for (effect in effects)
             player.addPotionEffect(PotionEffect(effect.potionEffectType, duration, effect.amplifier))
+        Message.sendMessageComponent(player, Message.EFFECT_ACTIVATE, ComponentObj(ComponentEnum.EFFECT, section))
+
     }
 
-    private fun removeEffects(player: Player) {
-        for (effect in effects) {
+    fun removeEffects(player: Player) {
+        for (effect in effects)
             player.removePotionEffect(effect.potionEffectType)
-        }
         Message.sendMessageComponent(player, Message.EFFECT_DISABLE, ComponentObj(ComponentEnum.EFFECT, section))
-    }
-
-    private fun applyEffects(player: Player) {
-        if (Cooldown.getCoolDownTimeLeft(player.uniqueId, section) > 0) {
-            Message.sendMessageComponent(player, Message.EFFECT_ON_COOLDOWN, ComponentObj(ComponentEnum.TIME, Cooldown.getCoolDownTimeLeft(player.uniqueId, section).toString()))
-            return
-        }
-        for (effect in effects)
-            player.addPotionEffect(PotionEffect(effect.potionEffectType, duration, effect.amplifier))
-        if (!player.hasPermission("bulpotioneffect.bypass.cooldown"))
-            Cooldown.addPlayerCoolDown(player.uniqueId, section, cooldown)
-        Message.sendMessageComponent(player, Message.EFFECT_GIVE, ComponentObj(ComponentEnum.EFFECT, section))
     }
 
     private fun isInfiniteDuration(): Boolean {

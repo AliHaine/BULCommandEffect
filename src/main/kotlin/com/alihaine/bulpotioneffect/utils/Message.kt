@@ -4,9 +4,13 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
 enum class Message(val key: String) {
-    EFFECT_GIVE("effect_give"),
+    EFFECT_ACTIVATE("effect_activate"),
     EFFECT_DISABLE("effect_disable"),
+    EFFECT_GIVE("effect_give"),
+    EFFECT_REMOVE("effect_remove"),
     EFFECT_ON_COOLDOWN("effect_on_cooldown"),
+    ERROR_PLAYER_EXIST("error_player_exist"),
+    ERROR_EFFECT_EXIST("error_effect_exist"),
     ERROR_CONFIG_EFFECT_EXIST("error_config_effect_exist"),
     ERROR_EFFECT_PERMISSION("error_effect_permission"),
     ERROR_UNKNOWN_COMMAND("error_unknown_command"),

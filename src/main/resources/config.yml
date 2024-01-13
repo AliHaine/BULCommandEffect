@@ -15,9 +15,13 @@ effects:
     perm: nightvision.permission
 
 messages:
-  effect_give: "&aYou have activated effect %effect%"
-  effect_disable: "&cYou disable the effect %effect%"
+  effect_activate: "&aThe effect %effect% has been activated"
+  effect_disable: "&cThe effect %effect% has been disable"
+  effect_give: "&aYou have give the effect %effect% to the target player"
+  effect_remove: "&aYou have remove the effect %effect% to the target player"
   effect_on_cooldown: "&cYou have to wait %time%   before using again this effect"
+  error_player_exist: "&cThe target player are not online or don't exist"
+  error_effect_exist: "&cThis effect don't exist"
   error_config_effect_exist: "&cERROR: the potion effect &e%potion% &cdon't exist"
   error_effect_permission: "&cYou don't have the permssion to use the effect %effect%"
   error_unknown_command: "&cThis command don't exist"
