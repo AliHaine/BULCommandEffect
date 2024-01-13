@@ -9,6 +9,8 @@ enum class Message(val key: String) {
     EFFECT_ON_COOLDOWN("effect_on_cooldown"),
     ERROR_CONFIG_EFFECT_EXIST("error_config_effect_exist"),
     ERROR_EFFECT_PERMISSION("error_effect_permission"),
+    ERROR_UNKNOWN_COMMAND("error_unknown_command"),
+    CONFIG_RELOAD("config_reload"),
     NO_PERMISSION("no_permission");
 
     companion object {

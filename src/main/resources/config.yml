@@ -17,7 +17,9 @@ effects:
 messages:
   effect_give: "&aYou have activated effect %effect%"
   effect_disable: "&cYou disable the effect %effect%"
-  effect_on_cooldown: "&cYou have to wait %time% before using again this effect"
+  effect_on_cooldown: "&cYou have to wait %time%   before using again this effect"
   error_config_effect_exist: "&cERROR: the potion effect &e%potion% &cdon't exist"
   error_effect_permission: "&cYou don't have the permssion to use the effect %effect%"
+  error_unknown_command: "&cThis command don't exist"
+  config_reload: "&aConfiguration reloaded"
   no_permission: "&cYou don't have the permission to do that"

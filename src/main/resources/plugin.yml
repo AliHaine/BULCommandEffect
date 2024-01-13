@@ -5,5 +5,5 @@ author: AliHaine
 main: com.alihaine.bulpotioneffect.BulPotionEffect
 api-version: 1.13
 commands:
-  bulcommandeffect:
-    description: Reload config
+  bpe:
+    description: Default command

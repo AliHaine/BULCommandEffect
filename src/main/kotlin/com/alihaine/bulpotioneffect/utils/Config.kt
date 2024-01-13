@@ -7,8 +7,6 @@ import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.potion.PotionEffectType
 
-
-
 class Config {
     companion object {
         val infinite: Int = setInfiniteValue()

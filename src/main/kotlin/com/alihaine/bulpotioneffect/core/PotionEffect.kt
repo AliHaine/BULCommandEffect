@@ -38,7 +38,7 @@ class PotionEffect(val section: String, val commands: MutableList<String?>, priv
         }
         for (effect in effects)
             player.addPotionEffect(PotionEffect(effect.potionEffectType, duration, effect.amplifier))
-        if (!player.hasPermission("bulcommandeffect.cooldown.bypass"))
+        if (!player.hasPermission("bulpotioneffect.bypass.cooldown"))
             Cooldown.addPlayerCoolDown(player.uniqueId, section, cooldown)
         Message.sendMessageComponent(player, Message.EFFECT_GIVE, ComponentObj(ComponentEnum.EFFECT, section))
     }

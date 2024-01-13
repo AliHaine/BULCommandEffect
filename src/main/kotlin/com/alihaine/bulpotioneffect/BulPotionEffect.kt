@@ -1,5 +1,6 @@
 package com.alihaine.bulpotioneffect
 
+import com.alihaine.bulpotioneffect.command.BPE
 import com.alihaine.bulpotioneffect.listeners.OnCommandPreprocess
 import com.alihaine.bulpotioneffect.listeners.OnPlayerRespawn
 import com.alihaine.bulpotioneffect.listeners.OnPlayerJoin
@@ -20,6 +21,9 @@ class BulPotionEffect : JavaPlugin() {
         this.server.pluginManager.registerEvents(OnCommandPreprocess(), this)
         this.server.pluginManager.registerEvents(OnPlayerJoin(), this)
         //this.server.pluginManager.registerEvents(OnPlayerRespawn(), this)
+
+        this.getCommand("bpe")!!.setExecutor(BPE())
+
         Bukkit.getConsoleSender().sendMessage("BulPotionEffect enabled")
     }
 
