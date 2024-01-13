@@ -67,6 +67,7 @@
                             <artifact>*:*</artifact>
                             <excludes>
                                 <exclude>META-INF/</exclude>
+                                <exclude>org/</exclude>
                             </excludes>
                         </filter>
                     </filters>
