@@ -1,6 +1,6 @@
 # BulPotionEffect
 
-This Minecraft plugin allows the creation of custom commands linked to specified potion effects, with a cooldown and permission system. Compatible with version 1.8 to the Latest Minecrat version. Link to download UNKNOW
+This Minecraft plugin allows the creation of custom commands linked to specified potion effects, with a cooldown and permission system. Compatible with version 1.8 to the Latest Minecrat version. Link to download https://www.spigotmc.org/resources/114482/
 
 ## Features
 

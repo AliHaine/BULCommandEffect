@@ -3,6 +3,7 @@ package com.alihaine.bulpotioneffect
 import com.alihaine.bulpotioneffect.command.BPE
 import com.alihaine.bulpotioneffect.listeners.OnCommandPreprocess
 import com.alihaine.bulpotioneffect.listeners.OnPlayerJoin
+import org.bstats.bukkit.Metrics
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.IOException
@@ -18,7 +19,8 @@ class BulPotionEffect : JavaPlugin() {
     }
 
     override fun onEnable() {
-        //updateChecker()
+        updateChecker()
+        Metrics(this, 20733)
         bulPotionEffect = this
         this.saveDefaultConfig()
 
@@ -35,14 +37,14 @@ class BulPotionEffect : JavaPlugin() {
         Bukkit.getConsoleSender().sendMessage("BulPotionEffect disable")
     }
 
-    /*private fun updateChecker() {
+    private fun updateChecker() {
         try {
-            URL("https://api.spigotmc.org/legacy/update.php?resource=NUMBER").openStream().use { inputStream ->
+            URL("https://api.spigotmc.org/legacy/update.php?resource=114482").openStream().use { inputStream ->
                 Scanner(inputStream).use { scanner ->
                     if (!scanner.next().equals(description.version)) {
                         Bukkit.getConsoleSender().sendMessage("------------------------------------------------------------------")
                         Bukkit.getConsoleSender().sendMessage("There is a new update available for BulPotionEffect !")
-                        Bukkit.getConsoleSender().sendMessage("Download here : LINK")
+                        Bukkit.getConsoleSender().sendMessage("Download here : https://www.spigotmc.org/resources/114482/")
                         Bukkit.getConsoleSender().sendMessage("------------------------------------------------------------------")
                     }
                 }
@@ -50,7 +52,7 @@ class BulPotionEffect : JavaPlugin() {
         } catch (exception: IOException) {
             logger.info("[BulPotionEffect] Cannot look for updates please contact dev in private: " + exception.message)
         }
-    }*/
+    }
 
     fun is1_19OrHiher(): Boolean {
         var value: Int = Bukkit.getBukkitVersion()[2].digitToInt()
