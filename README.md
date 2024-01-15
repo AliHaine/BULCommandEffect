@@ -6,13 +6,18 @@ This Minecraft plugin allows the creation of custom commands linked to specified
 
 - Create custom commands and link him to specified potion effects
 - Admin command to give and remove effect
-- Apply potion effects to a player upon their first join on the server
+- Define effects who will give to the player's upon their first join on the server
+- Define the Potion Effect that will persist after the player's death 
 - Define a permission for the use of the custon commands you have created
 - Set cooldown between each use to the custom commands
 - Set the duration of the effects applied
 - Fully configurable
 
 ## Configuration file
+
+> Define the effects that will persist after the player's death
+
+stay_after_death: [NIGHT_VISION]
 
 > Define the effects that will be given to the player upon their first join
 

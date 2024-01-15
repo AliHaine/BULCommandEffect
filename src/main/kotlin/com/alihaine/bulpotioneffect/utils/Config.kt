@@ -14,7 +14,7 @@ class Config {
         private var config: FileConfiguration = bulPotionEffect.config
         private var effectsList: MutableList<PotionEffect> = setupEffectsList()
         private var defaultEffectsList: MutableList<String?> = setupDefaultEffectsList()
-        private var stayDeathEffectsList: MutableList<String?> = setupStayDeathEffectsList()
+        private var stayDeathEffectsList: MutableList<PotionEffectType> = setupStayDeathEffectsList()
 
         fun getConfigString(path: String): String? {
             return config.getString(path)
@@ -81,8 +81,16 @@ class Config {
             return getConfigStringList("give_by_default")
         }
 
-        private fun setupStayDeathEffectsList(): MutableList<String?> {
-            return getConfigStringList("stay_after_death")
+        private fun setupStayDeathEffectsList(): MutableList<PotionEffectType> {
+            val deathEffects: MutableList<PotionEffectType> = mutableListOf()
+
+            for (str in getConfigStringList("stay_after_death")) {
+                if (str.isNullOrEmpty())
+                    continue
+                val po: PotionEffectType = PotionEffectType.getByName(str) ?: continue
+                deathEffects.add(po)
+            }
+            return deathEffects
         }
 
         fun getDefaultPotionEffectList(): MutableList<PotionEffect> {
@@ -110,6 +118,10 @@ class Config {
                     return commandEffect
             }
             return null
+        }
+
+        fun isStayDeathEffect(potionEffectType: PotionEffectType): Boolean {
+            return stayDeathEffectsList.contains(potionEffectType)
         }
 
         private fun setInfiniteValue(): Int {

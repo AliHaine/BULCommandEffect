@@ -1,3 +1,7 @@
+#BulPearl link : https://www.spigotmc.org/resources/114482/
+#If you like the plugin, let a star on the GitHub repo https://github.com/AliHaine/BulPotionEffect
+
+stay_after_death: [NIGHT_VISION]
 give_by_default: [nightvision_example, example1]
 
 effects:

@@ -1,6 +1,7 @@
 package com.alihaine.bulpotioneffect.listeners
 
 import com.alihaine.bulpotioneffect.BulPotionEffect
+import com.alihaine.bulpotioneffect.utils.Config
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -15,7 +16,10 @@ class OnPlayerRespawn : Listener {
         val saveEffects: MutableCollection<PotionEffect> = event.player.activePotionEffects
 
         Bukkit.getScheduler().runTaskLater(BulPotionEffect.bulPotionEffect, Runnable {
-            println(saveEffects)
+            for (potionEffect in saveEffects) {
+                if (Config.isStayDeathEffect(potionEffect.type))
+                    event.player.addPotionEffect(potionEffect)
+            }
         }, 20)
     }
 }

@@ -3,13 +3,13 @@ package com.alihaine.bulpotioneffect
 import com.alihaine.bulpotioneffect.command.BPE
 import com.alihaine.bulpotioneffect.listeners.OnCommandPreprocess
 import com.alihaine.bulpotioneffect.listeners.OnPlayerJoin
+import com.alihaine.bulpotioneffect.listeners.OnPlayerRespawn
 import org.bstats.bukkit.Metrics
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.IOException
 import java.net.URL
 import java.util.*
-
 
 class BulPotionEffect : JavaPlugin() {
 
@@ -26,7 +26,7 @@ class BulPotionEffect : JavaPlugin() {
 
         this.server.pluginManager.registerEvents(OnCommandPreprocess(), this)
         this.server.pluginManager.registerEvents(OnPlayerJoin(), this)
-        //this.server.pluginManager.registerEvents(OnPlayerRespawn(), this)
+        this.server.pluginManager.registerEvents(OnPlayerRespawn(), this)
 
         this.getCommand("bpe")!!.setExecutor(BPE())
 
@@ -50,7 +50,7 @@ class BulPotionEffect : JavaPlugin() {
                 }
             }
         } catch (exception: IOException) {
-            logger.info("[BulPotionEffect] Cannot look for updates please contact dev in private: " + exception.message)
+            logger.info("[BulPotionEffect] Cannot look for updates please join discord: https://discord.gg/wxnTV68dX2" + exception.message)
         }
     }
 
