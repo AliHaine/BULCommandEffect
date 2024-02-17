@@ -50,7 +50,6 @@ class Config {
                 var duration: Int = getConfigInt("${section.name}.$key.duration") * 20
                 val cooldown: Int = getConfigInt("${section.name}.$key.cooldown")
                 val perm: String? = getConfigString("${section.name}.$key.perm")
-
                 if (duration == 0)
                     duration = infinite
                 list.add(PotionEffect(key, commandsList, effectsList, duration, cooldown, perm.toString()))

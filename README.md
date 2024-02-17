@@ -4,7 +4,7 @@ This Minecraft plugin allows the creation of custom commands linked to specified
 
 ## Features
 
-- Create custom commands and link him to specified potion effects
+- Create custom commands and link them to specified potion effects
 - Admin command to give and remove effect
 - Define effects who will give to the player's upon their first join on the server
 - Define the Potion Effect that will persist after the player's death 
@@ -30,15 +30,12 @@ give_by_default: [nightvision_example, example1]
        example1:                                        <--- The name of your effect, have to be unique
           commands: [/mysuper command]                  <--- List of the commands who active your effect
           effects: [REGENERATION 1, INCREASE_DAMAGE 2]  <--- List of the Potion effects and their amplifier
-          duration: 60                                  <--- Duration of the Potion effects (0 for infinite)
-          cooldown: 300                                 <--- Cooldown between each use of your effect
-          perm: my.custom.permission                    <--- Permission to allow the use of your effect
+          duration: 60                                  <--- (Optional) Duration of the Potion effects (0 for infinite)
+          cooldown: 300                                 <--- (Optional) Cooldown between each use of your effect
+          perm: my.custom.permission                    <--- (Optional) Permission to allow the use of your effect
         nightvision_example:
            commands: [/nv, /nightvision, /night vision]
            effects: [NIGHT_VISION 1]
-           duration: 99999
-           cooldown: 10
-           perm: nightvision.permission
     
 > Define all the messages and actionbar text. If you don't want a specifique message you can define nothing beetwen the two "" quotation
 

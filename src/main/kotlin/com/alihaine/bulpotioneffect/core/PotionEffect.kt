@@ -4,11 +4,11 @@ import com.alihaine.bulpotioneffect.utils.*
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 
-class PotionEffect(val section: String, val commands: MutableList<String?>, private val effects: MutableList<Effect>, private val duration: Int, private val cooldown: Int, private val permission: String) {
+class PotionEffect(val section: String, val commands: MutableList<String?>, private val effects: MutableList<Effect>, private val duration: Int, private val cooldown: Int, private val permission: String?) {
 
 
     fun potionEffectApplier(player: Player) {
-        if (permission.isNotEmpty() && !player.hasPermission(permission)) {
+        if (!permission.isNullOrEmpty() && permission.isNotEmpty() && !player.hasPermission(permission)) {
             Message.sendMessageComponent(player, Message.ERROR_EFFECT_PERMISSION, ComponentObj(ComponentEnum.EFFECT, section))
             return
         }

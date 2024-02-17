@@ -20,7 +20,7 @@ class BulPotionEffect : JavaPlugin() {
 
     override fun onEnable() {
         updateChecker()
-        Metrics(this, 20733)
+        //Metrics(this, 20733)
         bulPotionEffect = this
         this.saveDefaultConfig()
 

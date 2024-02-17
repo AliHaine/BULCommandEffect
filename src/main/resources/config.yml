@@ -14,9 +14,6 @@ effects:
   nightvision_example:
     commands: [/nv, /nightvision, /night vision]
     effects: [NIGHT_VISION 1]
-    duration: 0
-    cooldown: 10
-    perm: nightvision.permission
 
 messages:
   effect_activate: "&aThe effect %effect% has been activated"
