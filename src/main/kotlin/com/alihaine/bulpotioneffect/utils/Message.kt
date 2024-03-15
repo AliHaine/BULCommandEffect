@@ -3,23 +3,23 @@ package com.alihaine.bulpotioneffect.utils
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
-enum class Message(val key: String) {
-    EFFECT_ACTIVATE("effect_activate"),
-    EFFECT_DISABLE("effect_disable"),
-    EFFECT_GIVE("effect_give"),
-    EFFECT_REMOVE("effect_remove"),
-    EFFECT_ON_COOLDOWN("effect_on_cooldown"),
-    ERROR_PLAYER_EXIST("error_player_exist"),
-    ERROR_EFFECT_EXIST("error_effect_exist"),
-    ERROR_CONFIG_EFFECT_EXIST("error_config_effect_exist"),
-    ERROR_EFFECT_PERMISSION("error_effect_permission"),
-    ERROR_UNKNOWN_COMMAND("error_unknown_command"),
-    CONFIG_RELOAD("config_reload"),
-    NO_PERMISSION("no_permission");
+enum class Message() {
+    EFFECT_ACTIVATE(),
+    EFFECT_DISABLE(),
+    EFFECT_GIVE(),
+    EFFECT_REMOVE(),
+    EFFECT_ON_COOLDOWN(),
+    ERROR_PLAYER_EXIST(),
+    ERROR_EFFECT_EXIST(),
+    ERROR_CONFIG_EFFECT_EXIST(),
+    ERROR_EFFECT_PERMISSION(),
+    ERROR_UNKNOWN_COMMAND(),
+    CONFIG_RELOAD(),
+    NO_PERMISSION();
 
     companion object {
         fun sendMessage(player: Player?, msg: Message) {
-            val message: String? = Config.getConfigString("messages.${msg.key}")
+            val message: String? = Config.getConfigString("messages.${msg.name.lowercase()}")
 
             if (message.isNullOrEmpty())
                 return
@@ -27,7 +27,7 @@ enum class Message(val key: String) {
         }
 
         fun sendMessageComponent(player: Player?, msg: Message, component: ComponentObj) {
-            var message: String? = Config.getConfigString("messages.${msg.key}")
+            var message: String? = Config.getConfigString("messages.${msg.name.lowercase()}")
 
             if (message.isNullOrEmpty())
                 return
